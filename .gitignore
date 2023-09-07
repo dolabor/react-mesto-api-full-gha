@@ -2,3 +2,8 @@
 .DS_Store
 .idea
 .vscode
+
+# Logs
+logs
+*.log
+npm-debug.log*

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const config = require('./utils/config');
 const { rootRouter } = require('./routes/routes');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const PORT = config.port;
 
@@ -14,7 +15,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(requestLogger);
 app.use(rootRouter);
+app.use(errorLogger);
 app.use(errors());
 
 // eslint-disable-next-line no-unused-vars
