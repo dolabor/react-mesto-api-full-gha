@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 320px) {
+  .header {
+    min-width: 320px;
+    padding: 28px 0 0 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    max-width: 880px;
+    padding: 45px 0 40px 0;
+    margin: auto;
+  }
+}

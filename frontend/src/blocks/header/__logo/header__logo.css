@@ -1,0 +1,19 @@
+.header__logo {
+  display: block;
+}
+
+@media (min-width: 320px) {
+  .header__logo {
+    width: 104px;
+    height: 24px;
+    padding: 0 0 32px 27px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header__logo {
+    width: 142px;
+    height: 33px;
+    padding: 0;
+  }
+}

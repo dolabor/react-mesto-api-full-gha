@@ -1,0 +1,15 @@
+.profile__username {
+  display: flex;
+}
+
+@media (min-width: 320px) {
+  .profile__username {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile__username {
+    text-align: left;
+  }
+}

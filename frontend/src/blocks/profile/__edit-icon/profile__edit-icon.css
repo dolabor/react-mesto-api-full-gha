@@ -1,0 +1,13 @@
+.profile__edit-icon {
+  padding: 4px 0 0 10px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (min-width: 768px) {
+  .profile__edit-icon {
+    width: 24px;
+    height: 24px;
+    padding: 8px 0 0 18px;
+  }
+}

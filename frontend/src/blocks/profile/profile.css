@@ -1,0 +1,31 @@
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+@media (min-width: 320px) {
+  .profile {
+    min-width: 280px;
+    padding:  42px 19px 36px 19px;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile {
+    min-width: 480px;
+    padding: 42px 48px 0 48px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1280px) {
+  .profile {
+    max-width: 880px;
+    justify-content: space-between;
+    margin: auto;
+  }
+}
