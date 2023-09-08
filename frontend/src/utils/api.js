@@ -99,7 +99,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'api.mesto-ec.students.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json'
   }
