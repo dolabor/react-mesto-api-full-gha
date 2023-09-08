@@ -15,7 +15,6 @@ const createCard = (req, res, next) => {
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
       Card.findById(card._id)
-        .populate('owner')
         .then((createdCard) => res.status(201).send(createdCard))
         .catch(() => next(new NotFoundError('Пользователь не найден')));
     })
@@ -30,7 +29,6 @@ const createCard = (req, res, next) => {
 
 const deleteCardById = (req, res, next) => {
   Card.findByIdAndRemove(req.params.cardId)
-    .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
         return next(new NotFoundError('Карточка не найдена'));

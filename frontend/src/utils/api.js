@@ -6,26 +6,16 @@ class Api {
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(res => this._checkResponse(res))
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
-    })
-      .then(res => this._checkResponse(res))
-  }
-
-  editProfile(name, about) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({
-        name,
-        about
-      })
+      credentials: 'include',
     })
       .then(res => this._checkResponse(res))
   }
@@ -33,10 +23,8 @@ class Api {
   addNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        ...this._headers,
-        'Accept': 'application/json'
-      },
+      headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: data.title,
         link: data["image-ref"]
@@ -48,7 +36,8 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(res => this._checkResponse(res))
   }
@@ -56,7 +45,8 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(res => this._checkResponse(res))
   }
@@ -65,6 +55,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
+      credentials: 'include',
     })
       .then(res => this._checkResponse(res))
   }
@@ -81,6 +72,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -92,6 +84,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -106,9 +99,9 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  baseUrl: 'http://localhost:4000',
   headers: {
-    authorization: '16924f85-2145-498e-b02a-b8904d6c73b2',
     'Content-Type': 'application/json'
   }
 });
+

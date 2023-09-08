@@ -75,7 +75,7 @@ function App(props) {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -122,16 +122,12 @@ function App(props) {
       .catch((err) => console.log(err));
   }
 
-  function handleLogout() {
-    setIsLoggedIn(false);
-    localStorage.removeItem('jwt');
-  }
-
   function handleRegister(data) {
     auth.register(data)
       .then(() => {
         setIsSuccessfulSignUp(true);
         handleInfoTooltipOpen();
+        navigate('/signin');
       })
       .catch((err) => {
         console.log(err);
@@ -141,27 +137,24 @@ function App(props) {
   }
 
   function tokenCheck() {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-
-      if (jwt) {
-        auth.checkToken(jwt).then((res) => {
-          if (res) {
-            setAuthorisedUserEmail(res.data.email)
-            setIsLoggedIn(true);
-            navigate("/", {replace: true})
-          }
-        })
-          .catch((err) => console.log(err));
-      }
-    }
+    auth.checkToken()
+      .then((res) => {
+        if (res) {
+          setAuthorisedUserEmail(res.email);
+          setIsLoggedIn(true);
+          navigate("/", {replace: true});
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoggedIn(false);
+      })
   }
 
   function handleLogin(data) {
     auth.login(data)
-      .then((data) => {
+      .then(() => {
         setIsLoggedIn(true);
-        localStorage.setItem('jwt', data.token);
         navigate('/');
       })
       .catch((err) => {
@@ -170,25 +163,41 @@ function App(props) {
       })
   }
 
+  function handleLogout() {
+    auth.logout()
+      .then((res) => {
+        if (res) {
+          setAuthorisedUserEmail('')
+          setIsLoggedIn(false);
+          navigate("/signin")
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   React.useEffect(() => {
     tokenCheck();
   }, [])
 
   React.useEffect(() => {
-    api.getProfile()
-      .then((profileData) => {
-        setCurrentUser(profileData)
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    if (isLoggedIn) {
+      api.getProfile()
+        .then((profileData) => {
+          setCurrentUser(profileData)
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   React.useEffect(() => {
-    api.getInitialCards(cards)
-      .then((cardList) => {
-        setCards(cardList);
-      })
-      .catch((err) => console.log(err))
-  }, []);
+    if (isLoggedIn) {
+      api.getInitialCards(cards)
+        .then((cardList) => {
+          setCards(cardList.reverse());
+        })
+        .catch((err) => console.log(err))
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

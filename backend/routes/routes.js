@@ -2,7 +2,7 @@ const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const userRouter = require('./users');
 const cardRouter = require('./cards');
-const { createUser, login } = require('../controllers/users');
+const { createUser, login, logout } = require('../controllers/users');
 const { NotFoundError } = require('../utils/errors/errors');
 const auth = require('../middlewares/auth');
 const { checkValidityURL } = require('../utils/validationURL');
@@ -25,6 +25,8 @@ rootRouter.post('/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
+
+rootRouter.delete('/signout', logout);
 
 rootRouter.use('/users', auth, userRouter);
 rootRouter.use('/cards', auth, cardRouter);

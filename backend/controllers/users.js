@@ -67,10 +67,16 @@ const login = (req, res, next) => {
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
+        sameSite: true,
       });
       return res.send({ token });
     })
     .catch(() => next(new UnauthorisedError('Неправильные почта или пароль')));
+};
+
+const logout = (req, res, next) => {
+  res.clearCookie('jwt').send({ message: 'Пользователь успешно вышел из системы' });
+  next();
 };
 
 const getCurrentUserProfile = (req, res, next) => {
@@ -122,5 +128,12 @@ const updateAvatar = (req, res, next) => {
 };
 
 module.exports = {
-  getUsers, getUserById, createUser, updateUserProfile, updateAvatar, login, getCurrentUserProfile,
+  getUsers,
+  getUserById,
+  createUser,
+  updateUserProfile,
+  updateAvatar,
+  login,
+  logout,
+  getCurrentUserProfile,
 };
