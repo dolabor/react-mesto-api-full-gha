@@ -56,7 +56,7 @@ class Auth {
 
 export const
   auth = new Auth({
-    baseURL: 'https://mesto-ec.students.nomoredomainsicu.ru',
+    baseURL: 'https://api.mesto-ec.students.nomoredomainsicu.ru',
     headers: {
       'Content-Type': 'application/json'
     }
