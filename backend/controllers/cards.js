@@ -28,7 +28,8 @@ const createCard = (req, res, next) => {
 };
 
 const deleteCardById = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findById(req.params.cardId)
+    // eslint-disable-next-line consistent-return
     .then((card) => {
       if (!card) {
         return next(new NotFoundError('Карточка не найдена'));
@@ -36,7 +37,9 @@ const deleteCardById = (req, res, next) => {
       if (!card.owner.equals(req.user._id)) {
         return next(new ForbiddenError('Вы не можете удалить данную карточку'));
       }
-      return res.send({ message: 'Карточка успешно удалена' });
+      Card.deleteOne(card)
+        .then(() => res.send({ message: 'Карточка удалена' }))
+        .catch(next);
     })
     .catch(next);
 };

@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const {
-  BadRequestError, NotFoundError, UnauthorisedError, ConflictError,
+  BadRequestError, NotFoundError, ConflictError,
 } = require('../utils/errors/errors');
 const config = require('../utils/config');
 
@@ -14,7 +14,7 @@ const getUsers = (req, res, next) => {
 
 const getUserById = (req, res, next) => {
   User.findById(req.params.userId)
-    .orFail(new Error('DocumentNotFoundError'))
+    .orFail(new NotFoundError('Пользователь не найден'))
     .then((user) => {
       res.send(user);
     })
@@ -69,9 +69,9 @@ const login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       });
-      return res.send({ token });
+      return res.send({ message: 'Пользователь успешно вошел в систему' });
     })
-    .catch(() => next(new UnauthorisedError('Неправильные почта или пароль')));
+    .catch(next);
 };
 
 const logout = (req, res, next) => {
@@ -113,7 +113,7 @@ const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const userId = req.user._id;
 
-  User.findByIdAndUpdate(userId, { avatar }, { new: true })
+  User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .orFail(new NotFoundError('Пользователь не найден'))
     .then((user) => {
       res.send(user);
