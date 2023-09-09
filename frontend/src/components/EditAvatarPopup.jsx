@@ -11,6 +11,12 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
     onUpdateAvatar({avatar: inputEditAvatar.current.value});
   }
 
+   React.useEffect(() => {
+    if (!isOpen) {
+      inputEditAvatar.current.value = "";
+    }
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       id="popup-change-avatar"

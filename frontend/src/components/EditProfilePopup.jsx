@@ -8,6 +8,15 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   const {values, setValues, errors, isValid, handleChange} = useFormValidation({});
 
   React.useEffect(() => {
+    if (!isOpen) {
+      setValues({
+        name: "",
+        about: "",
+      });
+    }
+  }, [isOpen, setValues]);
+
+  React.useEffect(() => {
     if (isOpen && currentUser) {
       setValues({
         ...values,
