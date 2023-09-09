@@ -22,7 +22,6 @@ const limiter = rateLimit({
 app.use(helmet());
 app.use(cors({
   origin: [
-    'https://api.mesto-ec.students.nomoredomainsicu.ru',
     'https://mesto-ec.students.nomoredomainsicu.ru',
     'http://localhost:3001',
   ],
