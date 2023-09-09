@@ -21,7 +21,12 @@ const limiter = rateLimit({
 
 app.use(helmet());
 app.use(cors({
-  origin: 'http://api.mesto-ec.students.nomoredomainsicu.ru',
+  origin: [
+    'http://api.mesto-ec.students.nomoredomainsicu.ru',
+    'http://mesto-ec.students.nomoredomainsicu.ru',
+    'http://localhost:4000',
+    'http://localhost:3000',
+  ],
   credentials: true,
 }));
 app.use(express.json());
