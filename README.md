@@ -11,6 +11,6 @@
 
 IP-адрес 158.160.46.184
 
-Frontend https://mesto-ec.students.nomoredomainsicu.ru/signin
+Frontend https://mesto-ec.students.nomoredomainsicu.ru
 
-Backend https://api.mesto-ec.students.nomoredomainsicu.ru/signin
+Backend https://api.mesto-ec.students.nomoredomainsicu.ru
