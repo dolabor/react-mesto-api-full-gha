@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.46.184
+IP 158.160.46.184
 
 Frontend https://mesto-ec.students.nomoredomainsicu.ru
 
