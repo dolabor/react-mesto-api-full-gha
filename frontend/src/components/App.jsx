@@ -145,8 +145,7 @@ function App(props) {
           navigate('/', {replace: true});
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setIsLoggedIn(false);
         navigate('/signin', { replace: true });
       })
@@ -159,7 +158,6 @@ function App(props) {
         navigate('/');
       })
       .catch((err) => {
-        console.log(err);
         navigate('/signin')
       })
   }
