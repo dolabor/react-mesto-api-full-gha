@@ -1,21 +1,21 @@
-import Header from "./Header";
-import Footer from "./Footer";
-import Main from "./Main";
+import Header from './Header';
+import Footer from './Footer';
+import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {api} from "../utils/api";
-import {auth} from "../utils/auth";
+import {api} from '../utils/api';
+import {auth} from '../utils/auth';
 
 import React from 'react';
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ProtectedRoute from "./ProtectedRoute";
-import {Route, Routes, useNavigate} from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import InfoTooltip from "./InfoTooltip";
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ProtectedRoute from './ProtectedRoute';
+import {Route, Routes, useNavigate} from 'react-router-dom';
+import Register from './Register';
+import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 
 function App(props) {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -33,7 +33,7 @@ function App(props) {
 
   //стейт для проверки, прошла ли регистрация
   const [isSuccessfulSignUp, setIsSuccessfulSignUp] = React.useState(false);
-  const [authorisedUserEmail, setAuthorisedUserEmail] = React.useState("");
+  const [authorisedUserEmail, setAuthorisedUserEmail] = React.useState('');
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const navigate = useNavigate()
@@ -142,12 +142,13 @@ function App(props) {
         if (res) {
           setAuthorisedUserEmail(res.email);
           setIsLoggedIn(true);
-          navigate("/", {replace: true});
+          navigate('/', {replace: true});
         }
       })
       .catch((err) => {
         console.log(err);
         setIsLoggedIn(false);
+        navigate('/signin', { replace: true });
       })
   }
 
@@ -169,7 +170,7 @@ function App(props) {
         if (res) {
           setAuthorisedUserEmail('')
           setIsLoggedIn(false);
-          navigate("/signin")
+          navigate('/signin')
         }
       })
       .catch((err) => console.log(err));
@@ -207,10 +208,10 @@ function App(props) {
         authorisedUserEmail={authorisedUserEmail}
       />
       <Routes>
-        <Route path="/signup"
+        <Route path='/signup'
                element={<Register onRegistration={handleRegister}/>}>
         </Route>
-        <Route path="/signin"
+        <Route path='/signin'
                element={
                  <Login
                    onAuthorization={handleLogin}
@@ -218,7 +219,7 @@ function App(props) {
                  />}>
         </Route>
         <Route
-          path="/"
+          path='/'
           element={
             <ProtectedRoute
               element={Main}
@@ -256,9 +257,9 @@ function App(props) {
       </EditAvatarPopup>
 
       <PopupWithForm
-        id="popup-confirm-delete"
-        title="Вы уверены?"
-        titleButton="Да"
+        id='popup-confirm-delete'
+        title='Вы уверены?'
+        titleButton='Да'
         isOpen={isDeleteCardPopupOpen}
         onClose={closeAllPopups}
         onSubmit={handleCardDelete}>
