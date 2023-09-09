@@ -45,7 +45,7 @@ class Auth {
       .then(res => this._checkResponse(res));
   };
 
-  logout() {
+  logout = () => {
     return fetch(`${this._baseURL}/signout`, {
       method: 'DELETE',
       credentials: 'include',
