@@ -3,7 +3,7 @@ import React from 'react';
 import useFormValidation from '../hooks/useFormValidation';
 
 function AddPlacePopup({isOpen, onClose, onAddPlace}) {
-  const {values, errors, isValid, handleChange} = useFormValidation({});
+  const {values, setValues, errors, isValid, handleChange} = useFormValidation({});
 
   function handleSubmit(e) {
     e.preventDefault();
