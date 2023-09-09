@@ -26,6 +26,7 @@ app.use(cors({
     'https://mesto-ec.students.nomoredomainsicu.ru',
     'http://localhost:3000',
   ],
+  methods: 'GET, POST, PUT, DELETE, PATCH',
   credentials: true,
 }));
 app.use(express.json());
